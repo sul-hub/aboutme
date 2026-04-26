@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #07090e;
+            --bg-gradient: linear-gradient(135deg, #05070a 0%, #111424 100%);
+            --card-bg: #131722;
+            --text-main: #ffffff;
+            --text-muted: #a0aab2;
+            --accent-color: #6366f1;
+            --accent-glow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        body {
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY & UTILITIES --- */
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+        
+        p {
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-main);
+            transition: color 0.3s ease;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7, 9, 14, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent-color);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            box-shadow: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        /* --- HERO / ABOUT SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            padding-top: 80px; /* Offset for navbar */
+        }
+
+        .profile-img-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--accent-color), #a855f7);
+            margin-bottom: 2rem;
+            box-shadow: var(--accent-glow);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--bg-dark); /* Fallback before image loads */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* --- PORTFOLIO SECTION --- */
+        .portfolio {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--accent-glow);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            background-color: #1a202c;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+        }
+
+        /* --- FOOTER / CONTACT --- */
+        footer {
+            text-align: center;
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 5rem;
+        }
+
+        footer h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: #5a6470;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simple mobile hiding for minimalism */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Port<span>folio</span>.</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+        </ul>
+        <a href="#contact" class="btn">Contact Me</a>
+    </nav>
+
+    <header id="about" class="hero">
+        <div class="profile-img-container fade-in">
+            <img src="C:\Users\sulta\OneDrive\Pictures\Screenshots\Screenshot 2026-04-24 192110.png" alt="Profile Photo" class="profile-img">
+        </div>
+        <h1 class="fade-in" style="transition-delay: 0.1s;">About Me</h1>
+        <p class="fade-in" style="transition-delay: 0.2s;">
+            Hello! I am a website designer with a passion for crafting clean, minimal, and modern digital experiences. I focus on creating interfaces that are not just visually appealing, but also intuitive and structurally sound.
+        </p>
+        <a href="#work" class="btn btn-primary fade-in" style="transition-delay: 0.3s;">View My Work</a>
+    </header>
+
+    <section id="work" class="portfolio">
+        <h2 class="section-title fade-in">My <span>Work</span></h2>
+        
+        <div class="grid">
+            <div class="card fade-in" style="transition-delay: 0.1s;">
+                <img src="c:\Users\sulta\OneDrive\Pictures\Screenshots\Screenshot 2026-04-25 161022.png" alt="Project 1" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title"> simple UI</h3>
+                    <p class="card-desc">A minimal and clean interface for an e-commerce platform.</p>
+                    <button onclick="window.open('http://localhost:5500/', '_blank')" class="btn" style="margin-top: 1rem; margin-left: 1rem;">View Project</button>
+                </div>
+            </div>
+
+            <div class="card fade-in" style="transition-delay: 0.2s;">
+                <img src="
+                
+                C:\Users\sulta\OneDrive\Pictures\Screenshots\Screenshot 2026-04-25 165146.png" alt="Project 2" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">employer tracker</h3>
+                    <p class="card-desc">A simple tool to track employer information and job working status and could work simonteanisaly with multiple users and AI.</p>
+                    <button onclick="window.open('file:///C:/Users/sulta/OneDrive/Documents/codingshii/employers.html', '_blank')" class="btn" style="margin-top: 1rem; margin-left: 1rem;">View Project</button>
+                </div>
+            </div>
+
+            <div class="card fade-in" style="transition-delay: 0.3s;">
+                <img src="C:\Users\sulta\OneDrive\Pictures\Screenshots\Screenshot 2026-04-26 184630.png" alt="Project 3" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Luxury Shopping</h3>
+                    <p class="card-desc">A creative and elegant shopping website for a luxury brand.</p>
+                    <button onclick="window.open('file:///C:/Users/sulta/OneDrive/Documents/codingshii/luxury-index.html', '_blank')" class="btn" style="margin-top: 1rem; margin-left: 1rem;">View Project</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h3 class="fade-in">Let's build something together.</h3>
+        <p class="fade-in" style="transition-delay: 0.1s;">Feel free to reach out for collaborations or just a friendly hello.</p>
+        <a href="mailto:sultansandid2@gmail.com" class="btn btn-primary fade-in" style="transition-delay: 0.2s;">Say Hello</a>
+        
+        <p class="copyright fade-in" style="transition-delay: 0.3s;">&copy; 2026 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer to handle the scroll-based fade-in/slide-up animations
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.15, // Elements trigger when 15% visible
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>
