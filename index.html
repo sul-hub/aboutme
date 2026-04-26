@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES & RESET --- */
         :root {
             --bg-dark: #07090e;
             --bg-gradient: linear-gradient(135deg, #05070a 0%, #111424 100%);
@@ -36,8 +35,6 @@
             background-attachment: fixed;
             overflow-x: hidden;
         }
-
-        /* --- TYPOGRAPHY & UTILITIES --- */
         h1, h2, h3 {
             font-weight: 600;
         }
@@ -52,8 +49,6 @@
             color: var(--text-main);
             transition: color 0.3s ease;
         }
-
-        /* --- ANIMATIONS --- */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -64,8 +59,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0;
@@ -99,8 +92,6 @@
         .nav-links a:hover {
             color: var(--accent-color);
         }
-
-        /* --- BUTTONS --- */
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
@@ -124,8 +115,6 @@
             border: none;
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
         }
-
-        /* --- HERO / ABOUT SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -134,7 +123,7 @@
             align-items: center;
             text-align: center;
             padding: 0 5%;
-            padding-top: 80px; /* Offset for navbar */
+            padding-top: 80px; 
         }
 
         .profile-img-container {
@@ -152,7 +141,7 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            background-color: var(--bg-dark); /* Fallback before image loads */
+            background-color: var(--bg-dark); 
         }
 
         .hero h1 {
@@ -166,8 +155,6 @@
             font-size: 1.1rem;
             margin-bottom: 2.5rem;
         }
-
-        /* --- PORTFOLIO SECTION --- */
         .portfolio {
             padding: 100px 5%;
         }
@@ -223,8 +210,6 @@
         .card-desc {
             font-size: 0.95rem;
         }
-
-        /* --- FOOTER / CONTACT --- */
         footer {
             text-align: center;
             padding: 4rem 5%;
@@ -246,11 +231,9 @@
             font-size: 0.85rem;
             color: #5a6470;
         }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simple mobile hiding for minimalism */
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -321,11 +304,10 @@
     </footer>
 
     <script>
-        // Intersection Observer to handle the scroll-based fade-in/slide-up animations
         const faders = document.querySelectorAll('.fade-in');
 
         const appearOptions = {
-            threshold: 0.15, // Elements trigger when 15% visible
+            threshold: 0.15, 
             rootMargin: "0px 0px -50px 0px"
         };
 
